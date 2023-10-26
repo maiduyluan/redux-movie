@@ -19,6 +19,10 @@ export const moviesApi = createApi({
     homepageMovie: builder.query({
       query: () => `/3/movie/popular?language=en-US&page=1`,
     }),
+
+    dangChieuMovie: builder.query({
+      query: () => `/3/movie/popular?language=en-US&page=1`,
+    }),
   }),
 })
 

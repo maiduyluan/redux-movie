@@ -2,7 +2,6 @@
 import React from 'react'
 import Link from "next/link";
 import SearchBar from './SearchBar';
-import { useState } from 'react'
 import years from '@/utils/yearsArr'
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsCategoryModalShow, setisYearsModalShow } from '@/app/features/modals/modalsSlice';
