@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   isCategoryModalShow: false,
-  isYearsModalShow: false
+  isYearsModalShow: false,
 }
 
 export const modalsSlice = createSlice({
@@ -10,17 +10,17 @@ export const modalsSlice = createSlice({
   initialState,
   reducers: {
     setIsCategoryModalShow: (state, action) => {
-        state.isCategoryModalShow = !state.isCategoryModalShow
+        state.isCategoryModalShow = action.payload
     },
 
 
-    setisYearsModalShow: (state, action) => {
+    setIsYearsModalShow: (state, action) => {
       state.isYearsModalShow = action.payload
-    }
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setIsCategoryModalShow, setisYearsModalShow } = modalsSlice.actions
+export const { setIsCategoryModalShow, setIsYearsModalShow } = modalsSlice.actions
 
 export default modalsSlice.reducer

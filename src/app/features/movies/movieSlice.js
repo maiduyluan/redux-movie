@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   trendingMoives: [],
   homepageMovie: [],
-  dangchieuMovie: [],
 }
 
 export const moviesSlice = createSlice({
