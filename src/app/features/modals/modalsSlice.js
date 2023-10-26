@@ -13,6 +13,7 @@ export const modalsSlice = createSlice({
         state.isCategoryModalShow = !state.isCategoryModalShow
     },
 
+
     setisYearsModalShow: (state, action) => {
       state.isYearsModalShow = action.payload
     }
