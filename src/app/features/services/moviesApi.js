@@ -31,6 +31,12 @@ export const moviesApi = createApi({
     phoBienMovie: builder.query({
       query: (numberPage) => `/3/movie/popular?language=en-US&page=${numberPage}`,
     }),
+
+    yearsMovie: builder.query({
+      query: ({numberPage, years}) => {
+        return `/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${numberPage}&primary_release_year=${years}&sort_by=popularity.desc`
+      },
+    }),
   }),
 })
 
@@ -41,5 +47,6 @@ export const {
   useHomepageMovieQuery, 
   useDangChieuMovieQuery, 
   useSapChieuMovieQuery, 
-  usePhoBienMovieQuery 
+  usePhoBienMovieQuery, 
+  useYearsMovieQuery,
 } = moviesApi

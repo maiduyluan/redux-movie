@@ -1,29 +1,28 @@
 'use client'
 import CardFilmTrangChu from '@/components/trangchu/CardFilm'
 import React from 'react'
-import { useEffect, useState } from 'react'
-import customAxios from '@/utils/customAxios'
 import NumberPage from '@/components/numberpage/NumberPage'
+import { setNumber } from '@/app/features/numberpage/numberpage'
+import { useSelector, useDispatch } from 'react-redux'
+import { useYearsMovieQuery } from '@/app/features/services/moviesApi'
 
 const YearsParamsPage = ({ params }) => {
-    
-    const [data, setData] = useState([])
-    const [numberPage, setNumberPage] = useState(1)
+    let years = params?.slug
 
-    console.log(params)
-
-    useEffect(() => {
-        customAxios(`/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${numberPage}&primary_release_year=${params.slug}&sort_by=popularity.desc`).then((data) => setData(data.results))
-    }, [numberPage])
+    const dispatch = useDispatch()
+    const numberPage = useSelector((state) => state.number.numberPage)
+    const {data, error, isLoading} = useYearsMovieQuery({numberPage, years})
 
     const handlePaganation = (id) => {
-        setNumberPage(id)
+        dispatch(setNumber(id))
     }
+
+    console.log('data: ', data)
 
     return (
         <div className='xl:w-10/12 md:w-8/12 w-full'>
             <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-5 p-5'>
-                {data.map((item, index) => (
+                {!!data && data?.results?.map((item, index) => (
                     <CardFilmTrangChu
                         key={index}
                         imageURL={item?.poster_path}
