@@ -21,11 +21,11 @@ export const moviesApi = createApi({
     }),
 
     dangChieuMovie: builder.query({
-      query: () => `/3/movie/popular?language=en-US&page=1`,
+      query: (numberPage) => `/3/movie/now_playing?language=en-US&page=${numberPage}`,
     }),
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useTrendingMovieQuery, useHomepageMovieQuery } = moviesApi
+export const { useTrendingMovieQuery, useHomepageMovieQuery, useDangChieuMovieQuery } = moviesApi
