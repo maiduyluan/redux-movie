@@ -1,26 +1,27 @@
 'use client'
 import CardFilm from '@/components/trangchu/CardFilm'
 import React from 'react'
-import { useEffect, useState } from 'react'
 import customAxios from '@/utils/customAxios'
 import NumberPage from '@/components/numberpage/NumberPage'
+import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setNumber } from '../features/numberpage/numberpage'
+import { useSapChieuMovieQuery } from '../features/services/moviesApi'
 
 const Page = () => {
-    const [data, setData] = useState([])
-    const [numberPage, setNumberPage] = useState(1)
+    const dispatch = useDispatch()
+    const numberPage = useSelector((state) => state.number.numberPage)
+    const { data, error, isLoading } = useSapChieuMovieQuery(numberPage)
 
-    useEffect(() => {
-        customAxios(`/3/movie/upcoming?language=en-US&page=${numberPage}`).then((data) => setData(data.results))
-    }, [numberPage])
 
     const handlePaganation = (id) => {
-        setNumberPage(id)
+        dispatch(setNumber(id))
     }
 
     return (
         <div className='xl:w-10/12 md:w-8/12 w-full'>
             <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-5 p-5'>
-                {data.map((item, index) => (
+                {!!data && data?.results?.map((item, index) => (
                     <CardFilm
                         key={index}
                         imageURL={item?.poster_path}
