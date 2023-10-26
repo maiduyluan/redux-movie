@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import customAxios from '@/utils/customAxios'
 
@@ -59,7 +60,7 @@ const SearchBar = () => {
             {!!inputNameMovie && <div className='absolute left-0 w-full bg-teal-600 p-2 rounded-lg mt-1'>
                 <p className='mb-2'>Kết quả tìm kiếm:</p>
                 {dataSearch?.map((item, index) => (
-                    <div key={index} className='flex border-gray-400 border p-2 mb-2 gap-2 rounded-lg'>
+                    <Link href='/' key={index} className='flex border-gray-400 border p-2 mb-2 gap-2 rounded-lg'>
                         <img
                             src={`https://image.tmdb.org/t/p/w300/${item?.poster_path}`}
                             alt="name movie"
@@ -69,7 +70,7 @@ const SearchBar = () => {
                             <p>{item?.original_title}</p>
                             <p className='line-clamp-4'>{item?.overview}</p>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>}
         </div>
