@@ -33,13 +33,19 @@ export const moviesApi = createApi({
     }),
 
     yearsMovie: builder.query({
-      query: ({numberPage, years}) => {
-        return `/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${numberPage}&primary_release_year=${years}&sort_by=popularity.desc`
+      query: ({numberPage, params}) => {
+        return `/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${numberPage}&primary_release_year=${params.slug}&sort_by=popularity.desc`
+      },
+    }),
+
+    categoryMovie: builder.query({
+      query: ({numberPage, params}) => {
+        return `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${numberPage}&sort_by=popularity.desc&with_genres=${params.slug}`
+
       },
     }),
   }),
 })
-
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 export const { 
@@ -49,4 +55,5 @@ export const {
   useSapChieuMovieQuery, 
   usePhoBienMovieQuery, 
   useYearsMovieQuery,
+  useCategoryMovieQuery,
 } = moviesApi

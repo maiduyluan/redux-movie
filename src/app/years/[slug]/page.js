@@ -7,11 +7,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useYearsMovieQuery } from '@/app/features/services/moviesApi'
 
 const YearsParamsPage = ({ params }) => {
-    let years = params?.slug
-
     const dispatch = useDispatch()
     const numberPage = useSelector((state) => state.number.numberPage)
-    const {data, error, isLoading} = useYearsMovieQuery({numberPage, years})
+    const {data, error, isLoading} = useYearsMovieQuery({numberPage, params})
 
     const handlePaganation = (id) => {
         dispatch(setNumber(id))
