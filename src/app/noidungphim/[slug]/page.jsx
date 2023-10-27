@@ -1,21 +1,14 @@
 'use client'
 import React from 'react'
 import Image from 'next/image'
-import customAxios from '@/utils/customAxios'
 import CardCeleb from '@/components/noidungphim/CardCeleb'
 import InfoFilm from '@/components/noidungphim/InfoFilm'
 import OverviewFilm from '@/components/noidungphim/OverviewFilm'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useNoidungMovieQuery } from '@/app/features/services/moviesApi'
 
 const ContentParams = ({ params }) => {
-  const [data, setData] = useState()
-
-  useEffect(() => {
-    customAxios(`/3/movie/${params.slug}?language=en-US&append_to_response=videos,credits,similar`).then((data) => setData(data))
-  }, [])
-
-  console.log(data)
+  const { data, error, isLoading } = useNoidungMovieQuery( params)
 
   const cardCelebs = data?.credits?.cast?.slice(0, 20)
 

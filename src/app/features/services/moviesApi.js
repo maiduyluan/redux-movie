@@ -41,7 +41,12 @@ export const moviesApi = createApi({
     categoryMovie: builder.query({
       query: ({numberPage, params}) => {
         return `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${numberPage}&sort_by=popularity.desc&with_genres=${params.slug}`
+      },
+    }),
 
+    noidungMovie: builder.query({
+      query: (params) => {
+        return `/3/movie/${params.slug}?language=en-US&append_to_response=videos,credits,similar`
       },
     }),
   }),
@@ -55,5 +60,5 @@ export const {
   useSapChieuMovieQuery, 
   usePhoBienMovieQuery, 
   useYearsMovieQuery,
-  useCategoryMovieQuery,
+  useNoidungMovieQuery,
 } = moviesApi
