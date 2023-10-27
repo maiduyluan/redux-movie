@@ -6,14 +6,14 @@ import InfoFilm from '@/components/noidungphim/InfoFilm'
 import OverviewFilm from '@/components/noidungphim/OverviewFilm'
 import { CgMenuLeft } from 'react-icons/cg'
 import { useEffect, useState } from 'react'
+import { setEpisode } from '@/app/features/movies/movieSlice'
+import { useWatchMovieQuery } from '@/app/features/services/moviesApi'
+import { useSelector, useDispatch } from 'react-redux'
 
 const ContentParams = ({ params }) => {
-    const [data, setData] = useState({})
-    const [episode, setEpisode] = useState(0)
-
-    useEffect(() => {
-        customAxios(`/3/movie/${params.slug}?language=en-US&append_to_response=videos,credits,similar`).then((data) => setData(data))
-    }, [])
+    const dispatch = useDispatch()
+    const episode = useSelector((state) => state.movie.episode)
+    const { data, error, isLoading } = useWatchMovieQuery(params)
 
     const cardCelebs = data?.credits?.cast?.slice(0, 20)
     const arrEp = data?.videos?.results
@@ -41,7 +41,7 @@ const ContentParams = ({ params }) => {
                 {arrEp?.map((i, index) => (
                     <button
                         key={i?.key}
-                        onClick={() => setEpisode(index)}
+                        onClick={() => dispatch(setEpisode(index))}
                         className='p-2 bg-teal-500 m-1 rounded-md'
                     >{index}</button>
                 ))}
