@@ -1,18 +1,15 @@
 import React from 'react'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
 import customAxios from '@/utils/customAxios'
+import { useSelector, useDispatch } from 'react-redux'
+import { setInputNameMovie } from '@/app/features/movies/movieSlice'
+import { useSearchMovieQuery } from '@/app/features/services/moviesApi'
+
 
 const SearchBar = () => {
-    const [inputNameMovie, setInputNameMovie] = useState('')
-    const [nameMovie, setNameMovie] = useState([])
-
-    useEffect(() => {
-        customAxios(`/3/search/movie?query=${inputNameMovie}&include_adult=false&language=en-US&page=1`).then((data) => setNameMovie(data))
-    }, [inputNameMovie])
-
-    const dataSearch = nameMovie?.results
-    
+    const dispatch = useDispatch()
+    const inputNameMovie = useSelector((state) => state.movie.inputNameMovie)
+    const { data, error, isLoading } = useSearchMovieQuery(inputNameMovie)
 
     return (
         <div className='relative xl:w-[400px]'>
@@ -41,7 +38,7 @@ const SearchBar = () => {
                     </div>
                     <input
                         onChange={(e) =>
-                            setInputNameMovie(e.target.value)
+                            dispatch(setInputNameMovie(e.target.value))
                         }
                         type="search"
                         id="default-search"
@@ -59,8 +56,8 @@ const SearchBar = () => {
             </form>
             {!!inputNameMovie && <div className='absolute left-0 w-full bg-teal-600 p-2 rounded-lg mt-1'>
                 <p className='mb-2'>Kết quả tìm kiếm:</p>
-                {dataSearch?.map((item, index) => (
-                    <Link href='/' key={index} className='flex border-gray-400 border p-2 mb-2 gap-2 rounded-lg'>
+                {!!data &&  data?.results?.map((item, index) => (
+                    <Link href={`/noidungphim/${item?.id}`} key={index} className='flex border-gray-400 border p-2 mb-2 gap-2 rounded-lg'>
                         <img
                             src={`https://image.tmdb.org/t/p/w300/${item?.poster_path}`}
                             alt="name movie"
