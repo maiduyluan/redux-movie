@@ -2,7 +2,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/header/header'
 import Trending from '@/components/trending/trending'
-import ProviderRedux from './features/provider'
+import ProviderRedux from './features/Provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
