@@ -72,6 +72,7 @@ export const {
   useSapChieuMovieQuery, 
   usePhoBienMovieQuery, 
   useYearsMovieQuery,
+  useCategoryMovieQuery,
   useNoidungMovieQuery,
   useWatchMovieQuery,
   useSearchMovieQuery,

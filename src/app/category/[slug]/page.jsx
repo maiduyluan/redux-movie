@@ -1,7 +1,6 @@
 'use client'
 import CardFilmTrangChu from '@/components/trangchu/CardFilm'
 import React from 'react'
-import customAxios from '@/utils/customAxios'
 import NumberPage from '@/components/numberpage/NumberPage'
 import { setNumber } from '@/app/features/numberpage/numberpage'
 import { useSelector, useDispatch } from 'react-redux'
