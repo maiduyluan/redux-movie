@@ -49,6 +49,12 @@ export const moviesApi = createApi({
         return `/3/movie/${params.slug}?language=en-US&append_to_response=videos,credits,similar`
       },
     }),
+
+    watchMovie: builder.query({
+      query: (params) => {
+        return `/3/movie/${params.slug}?language=en-US&append_to_response=videos,credits,similar`
+      },
+    }),
   }),
 })
 // Export hooks for usage in functional components, which are
@@ -61,4 +67,5 @@ export const {
   usePhoBienMovieQuery, 
   useYearsMovieQuery,
   useNoidungMovieQuery,
+  useWatchMovieQuery,
 } = moviesApi
