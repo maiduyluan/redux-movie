@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  trendingMoives: [],
-  homepageMovie: [],
   episode: 0,
+  inputNameMovie: '',
 }
 
 export const moviesSlice = createSlice({
@@ -12,11 +11,15 @@ export const moviesSlice = createSlice({
   reducers: {
     setEpisode: (state, action) => {
       state.episode = action.payload
-    }
+    },
+
+    setInputNameMovie: (state, action) => {
+      state.inputNameMovie = action.payload
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setTrendingMovie, sethomePageMovie , setEpisode} = moviesSlice.actions
+export const { setEpisode, setInputNameMovie, setNameMovie } = moviesSlice.actions
 
 export default moviesSlice.reducer
